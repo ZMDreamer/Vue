@@ -10,7 +10,7 @@
 
 ## Vue里面的指令
 + v-text和v-html都是用来渲染页面数据用的,写在标签的属性上`<div v-text = "数据的键"></div>` `<div v-html = "数据的键"></div>`,v-html中可以嵌套标签
-*** 注意: 在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 XSS 攻击。只在可信内容上使用 v-html，永不用在用户提交的内容上。***
+**注意: 在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 XSS 攻击。只在可信内容上使用 v-html，永不用在用户提交的内容上.**
 + v-bind的基本用法, 可以动态的绑定属性. 
     +使用方式: `v-bind:属性名='data里面的属性值'`
     +简写方式: `:属性名='data里面的属性值'`
@@ -20,18 +20,18 @@
   + 可以是数组和对象的混合 `:class='[{'active':布尔值}]'`
 + v-for用来循环数组和对象,配合`:key=" "`来使用
     1. 循环数组两种方法:
-        +在标签的属性位置上写上 `v-for = "item in arr"`, item表示数组的值, arr表示需要遍历的数组
-        +在标签的属性位置上写上 `v-for = "(value,index) in arr"`, vale表示数组的值, index表示数组的索引,arr表示需要遍历的数组
+        + 在标签的属性位置上写上 `v-for = "item in arr"`, item表示数组的值, arr表示需要遍历的数组
+        + 在标签的属性位置上写上 `v-for = "(value,index) in arr"`, vale表示数组的值, index表示数组的索引,arr表示需要遍历的数组
     2. 循环对象的两种方法:
-        +在标签的属性位置上写上 `v-for = "value in obj"` , value表示对象中的值, obj表示需要遍历的对象 
-        +在标签的属性位置上写上 `v-for = "(value,key,index) in obj"` , value表示对象中的值, key表示对象的键, index表示对象的索引 obj表示需要遍历的对象 
+        + 在标签的属性位置上写上 `v-for = "value in obj"` , value表示对象中的值, obj表示需要遍历的对象 
+        + 在标签的属性位置上写上 `v-for = "(value,key,index) in obj"` , value表示对象中的值, key表示对象的键, index表示对象的索引 obj表示需要遍历的对象 
     3. v-for能过根据data里面的数据的变化自动的更新view里面内容
     4. 数组注意点: 
-         +当使用数组的length属性去改变需要循环数组,数组改变了,但是view里面的内容不会改变
-         +当使用数组的index索引去改变需要循环数组中的值,数组的值改变了,但是view里面的内容不会改变
+         + 当使用数组的length属性去改变需要循环数组,数组改变了,但是view里面的内容不会改变
+         + 当使用数组的index索引去改变需要循环数组中的值,数组的值改变了,但是view里面的内容不会改变
     5. 解决改变数组数据方法:
-         +使用`Vue.set(arr,index,newval)`来改变数组的值, arr为需要改变的数组, index为索引, newval是改变后的值
-         +使用`Array.prototype.splice()`数组的方法来改变数组数据也可以
+         + 使用`Vue.set(arr,index,newval)`来改变数组的值, arr为需要改变的数组, index为索引, newval是改变后的值
+         + 使用`Array.prototype.splice()`数组的方法来改变数组数据也可以
     6.v-for结合`:key=""` 属性的好处: key会成为数组中每一项的唯一标识符, 如果未来数组中的某一项发生了改变, 我们view层的数据不会重新去加载, 只会根据唯一标识符去改变那一项, 好处是能够更好的提升性能
 + v-model指令使用来双向数据绑定的
     1. 即model层数据和view中的值进行同步的变化
