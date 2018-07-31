@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/vue2.js"></script>
+</head>
+<body>
+    <div id = "dv">
+        <!-- 循环遍历数组生成p标签 -->
+        <!-- 
+            数组循环的两种方法:
+            1.在标签属性的位置上写v-for="item in arr",item表示数组中的每一项,arr表示需要遍历的数组
+            2.在标签属性的位置上写v-for="(value,index) in arr" value表示数组的值,index表示索引
+         -->
+        <p v-for="item in student" :key="item.name">{{item.name}}:{{item.age}}:{{item.gender}}</p>
+        <p v-for="(item, index) in student" :key="index">{{item.name}}:{{item.age}}:{{item.gender}}:索引:{{index}}</p>
+
+        <!-- 循环遍历对象渲染数据-->
+        <!-- 对象的循环方法:
+            1.在标签属性的位置上写v-for = "value in obj", value表示对象的值,obj表示要循环的对象
+            2.在标签属性的位置上写v-for = "(value,key,index) in obj" value表示对象的值,key表示数组的键,index表示数组的索引
+        -->
+    <div v-for = "value in teacher">{{value}}</div>
+    <div v-for = "(value,key,index) in teacher" :key="index">{{key}}:{{value}}索引:{{index}}</div>
+
+    </div>
+    <!-- v-for能够根据data中的数据的变化自动刷新views部分 -->
+    <!-- 使用数组注意点:
+        1. 当使用数组的length属性去改变数组时候,view视层不会改变
+        2. 当使用数组的index属性来改变数组中的某一项值时候,view部分也不会改变
+        解决办法: 1.使用Vue.set(arr,index,newval) arr是需要改变的数组, index为该数组的索引, newval为改变后的内容
+                  2.使用数组的方法 Array.prototype.splice()也可以来改变
+
+        3.在实际的开发中使用v-for的时候必须结合:key=""使用, 它会标识数组中的每一项,如果数组中的那一项改变了,不会去改变整个数组,只会改变那一项
+        优点: 提升性能
+    
+    -->
+    
+</body>
+</html>
+<script>
+    const vm = new Vue({
+        el:'#dv',
+        data:{
+            student:[
+                {name:'张三',age:18,gender:'男'},
+                {name:'李四',age:19,gender:'女'}
+            ],
+            teacher:{name:'xinkail',age:18,gender:'女'}
+        }
+    })
+
+
+</script>

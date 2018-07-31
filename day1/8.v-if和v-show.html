@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1.引入vue文件 -->
+    <script src="./js/vue2.js"></script>
+</head>
+<body>
+    <div id = "content">
+       <p v-if = "msg"> 如果为真显示我</p>
+       <p v-show = "msg"> 如果为真显示我</p>
+       <p v-show = "isNotVisible"> 如果为假就隐藏我</p>
+    </div>
+    <!-- v-if和v-show都是用来控制元素的隐藏和显示的 -->
+    <!-- 
+        区别: 1. v-if是通过控制添加和删除dom元素来控制元素的显示隐藏
+              2. v-show是通过控制样式display:none来控制元素的显示隐藏
+        使用场景: 1.如果元素需要频繁的dom操作,使用v-show来进行控制
+                  2.涉及到异步数据渲染的时候就使用v-if
+     -->
+    
+</body>
+</html>
+<script>
+    //创建一个vue实例,这个实例能够监管html代码
+    var vm = new Vue({
+        //通过el属性指定vue实例监管范围
+        el: '#content',
+        data:{
+            msg: true,
+            isNotVisible:false
+        }
+    })
+</script>

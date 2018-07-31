@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/vue2.js"></script>
+    <style>
+        .redBox{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        .active{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id = "bind">
+        <!-- 绑定简单的属性 -->
+        <!-- <img v-bind:src="avatar"> -->
+        <!-- 简洁语法,以后推荐使用这种语法 -->
+        <img :src = "avatar">
+        <!-- 绑定链接跳转地址进行传参,利用字符串拼接 -->
+        <a :href = "'index.php?id='+id">跳转到目标页面</a>
+        <p :class="{'redBox':true}">这是动态添加的类样式</p>
+        <p :class="{'redBox':id==11?'redBox':''}">这是三元表达式的类样式</p>
+        <p :class="[active]">这是数组格式来添加的数据</p>
+        <!-- 上面添加的是'redBox类样式,而下面添加的是'active'的类样式 -->
+        <p :class="['active']">这是数组值是样式的值来添加的数据</p>
+        <p :class="[{'redBox':true}]">这是数组中使用对象来添加的数据</p>
+
+    </div>
+    
+</body>
+</html>
+<script>
+    const vm = new Vue({
+        el:'#bind',
+        data:{
+            avatar:'./imges/v-bind.png',
+            active: 'redBox',
+            id: 11
+        }
+        
+    })
+    
+</script>

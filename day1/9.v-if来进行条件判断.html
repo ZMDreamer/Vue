@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1.引入vue文件 -->
+    <script src="./js/vue2.js"></script>
+</head>
+<body>
+    <!-- 通过{{}}属性展示数据 -->
+    <div id = "content">
+      <div v-if = "0">
+          <p>{{msg1}}</p>
+      </div>
+      <div v-else-if="isTrue==1">
+          <p>{{msg}}</p>
+      </div>
+      <div v-else>
+          <p>{{msg}}</p>
+      </div>
+    </div>
+    
+</body>
+</html>
+<script>
+    //创建一个vue实例,这个实例能够监管html代码
+    var vm = new Vue({
+        //通过el属性指定vue实例监管范围
+        el: '#content',
+        data:{
+            msg1: '输出其它的',
+            msg: '输出内容',
+            isTrue:0
+        }
+    })
+</script>

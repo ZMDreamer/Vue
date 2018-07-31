@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1.引入vue文件 -->
+    <script src="./js/vue2.js"></script>
+</head>
+<body>
+    <!-- 通过{{}}属性展示数据 -->
+    <div id = "content">
+       <p> {{msg}}</p>
+       <!-- <button v-on:click="changeContent"> 点击改变试试</button> -->
+       <!-- 简写 -->
+       <button @click="changeContent"> 点击改变试试</button>
+       <!-- 通过执行函数来传递参数 -->
+       <button @click="printParams('打印我试试')">点我看执行函数有没有打印参数</button>
+       <!-- 通过执行函数添加事件对象,只能是$event形式传参 $event不能加引号-->
+       <button @click="getEventObj($event)">点我看看事件对象</button>
+       <!-- 事件修饰符常用 .prevent阻止浏览器默认行为, .stop阻止冒泡等 -->
+       <a href="http://www.baidu.com" @click.prevent="preventDefault;">阻止a标签的跳转</a>
+       <!-- 按键修饰符 -->
+       <input type="text" @keyup.enter="enterFunction">
+    </div>
+    
+</body>
+</html>
+<script>
+    //创建一个vue实例,这个实例能够监管html代码
+      //可以自定义需要的修饰符
+      Vue.config.keyCodes.a=103;
+    var vm = new Vue({
+      
+        //通过el属性指定vue实例监管范围
+        el: '#content',
+        data:{
+            msg: '这是一个vue测试小项目'
+        },
+        methods:{
+            changeContent(){
+                this.msg = "点击把内容变为我"
+            },
+            printParams(aa){
+                alert(aa);
+            },
+            getEventObj(e){
+                console.log(e);
+            },
+            preventDefault(){
+                console.log('阻止a的跳转')
+            },
+            enterFunction(){
+                console.log('按enter触发函数')
+            }
+            
+        }
+    })
+</script>

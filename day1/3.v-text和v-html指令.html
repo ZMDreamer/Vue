@@ -19,6 +19,7 @@
 <script>
     /* v-text与v-html的区别就像js中innerText和innerHtml的区别 */
     /* 平时推荐使用{{}}插值表达式 */
+    /* v-html解析的内容很不安全,如果用户输入的内容包含html,js代码可以解析,那么此时你的网站就会受到攻击 */
     var vm = new Vue({
         el: "#box",
         data:{

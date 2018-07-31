@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak]{
+            display:none;
+        }
+    </style>
+    <script src="./js/vue2.js"></script>
+</head>
+<body>
+    <!-- 
+        问题:在浏览器加载页面的时候,后面的数据还没显示,所以页面会瞬间出现{{msg}},为了解决这一问题,vue提供了v-cloak属性
+        v-cloak: 给闪烁元素添加v-cloak属性,当文件编译完毕后,v-cloak属性会被自动删除
+     -->
+    <div id = "app">
+        <p v-cloak>{{msg}}</p>
+    </div>
+</body>
+</html>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data:{
+            msg: '解决闪烁的问题'
+        }
+    })
+</script>
