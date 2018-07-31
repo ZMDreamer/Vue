@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/vue2.js"></script>
+</head>
+<body>
+    <div id = "div">
+        <!-- 插值表达式里面可以写表达式以及三元运算符 -->
+        <p> {{name}}</p>
+        <p>{{age>=18?'已成年':'未成年'}}</p>
+        <p>{{chickname.split('').reverse().join('')}}</p>
+    </div>
+    
+</body>
+</html>
+<script>
+    var vm = new Vue({
+        el: '#div',
+        data:{
+            name: '张三',
+            chickname: 'littleThree',
+            age: '18',
+            gender: '男'
+        }
+    })
+</script>
