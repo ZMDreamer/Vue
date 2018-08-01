@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/vue2.js"></script>
+</head>
+<body>
+    <div id = "app">
+        <input type="text" v-model = "firstName">
+        <input type="text" v-model = "lastName">
+        <p>全名: {{firstName +lastName}}</p>
+        <h3>计算属性computed</h3>
+
+        <div>全名:{{fullName}}</div>
+
+
+        <p>监视属性watch</p>
+        <div>全名:{{watchFullName}}</div>
+    </div>
+    
+</body>
+</html>
+<script>
+    const vm = new Vue({
+        el: "#app",
+        data:{
+            firstName: '',
+            lastName: '',
+            watchFullName: ''
+        },
+        //计算属性是根据data中已有的属性,计算得到一个新的属性
+        //提升性能,可以从缓存中获取值
+        computed:{
+            fullName(){
+                return this.firstName + this.lastName;
+            }
+        },
+        //开发的时候能用computed解决的问题就用computed
+        // 在执行异步操作的时候只能用watch操作
+        watch:{
+            firstName(newVal,oldVal){
+                this.watchFullName = newVal + this.lastName;
+            },
+            lastName(newVal,oldVal){
+                this.watchFullName = this.firstName + newVal ;
+            }
+        }
+
+       
+    })
+</script>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="./vue2.js"></script>
+  <style>
+    #app {
+      width: 600px;
+      margin: 10px auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <p><input type="text" v-add-border></p>
+    <p><input type="text" v-add-border="color"></p>
+    <p><input type="text" v-add-border="'blue'"></p>
+  </div>
+  <div id="app1">
+    <p><input type="text" v-add-border v-add-bg></p>
+    <p><input type="text" v-add-border="color"></p>
+    <p><input type="text" v-add-border="'blue'"></p>
+  </div>
+</body>
+
+<script>
+  // 1. 全局自定指令
+  Vue.directive('addBorder', { 
+    // 注意 如果自定指令是驼峰命名法  然后html使用这个自定义指令的时候一定要用-替换 如 addBorder 使用v-add-border
+    inserted(el, binding) {
+      // console.log(this.vm, 1111)
+     /*  setTimeout(() => {
+        console.log(this.vm.color, 1111)
+      }, 0); */
+      el.style.border = "1px solid pink"
+      // binding.value  'red'
+      if (binding.value) {
+        el.style.color=binding.value
+      }
+    }
+  })
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      color: 'red'
+    }
+  })
+  var vm1 = new Vue({
+    el: '#app1',
+    data: {
+      color: 'red'
+    },
+    directives: {
+      'addBg': function(el, binding) {
+        console.log(el, binding)
+        el.style.background = 'gold'
+      }
+    }
+  })
+</script>
+
+</html>

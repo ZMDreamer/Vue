@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="./vue2.js"></script>
+  <style>
+    #app {
+      width: 600px;
+      margin: 10px auto;
+    }
+
+    .tb {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .tb th {
+      background-color: #0094ff;
+      color: white;
+    }
+
+    .tb td,
+    .tb th {
+      padding: 5px;
+      border: 1px solid black;
+      text-align: center;
+    }
+
+    .add {
+      padding: 5px;
+      border: 1px solid black;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+      <p id="p">{{newName}}</p>
+      <button @click="change">修改newName</button>
+  </div>
+</body>
+
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      newName: '联想'
+    },
+    // mounted钩子函数很特殊，它表示页面一加载进来就执行函数里面的内容（和window.onload类似）
+    // 注意：mounted钩子函数的名字不能不能随便取，而且它不能写在methods属性。
+
+    // 生命周期函数(钩子函数) 会自动执行
+    // 在DOM渲染完毕后会自动执行
+    beforeCreate() {
+      console.log('beforeCreate', this.newName)
+    },
+    created() {
+      var element = document.getElementById('p')
+      element.style.background = 'blue'
+      console.log('created', this.newName, element)
+      // 此处因该发ajax请求 
+    },
+    beforeMount() {
+      var element = document.getElementById('p')
+      console.log('beforeMount', this.newName, element)
+    },
+    mounted () {
+      var element = document.getElementById('p')
+      console.log('mounted', this.newName, element)
+    },
+    beforeUpdate() {
+      console.log('beforeUpdate', this.newName)
+    },
+    updated() {
+      console.log('updated', this.newName)
+    },
+    methods: {
+      change() {
+        this.newName = '心若联想，如何移动'
+      }
+    }
+  })
+</script>
+
+</html>
