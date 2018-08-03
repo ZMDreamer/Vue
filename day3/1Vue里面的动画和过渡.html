@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/vue2.js"></script>
+    <style>
+    .slide-enter,.slide-leave-to{
+        padding-left: 200px
+    }
+    .slide-enter-active,.slide-leave-active{
+        transition: all 4s;
+    }
+    .slide-enter-to,
+    .slide-leave{
+        padding-left: 0px;
+    }
+    
+    
+    </style>
+</head>
+<body>
+    <div id = "app">
+        <transition name = "slide">
+        <div class="box" v-show="show">{{msg}}</div>
+        </transition>
+        <button @click="show=!show">点击</button>
+    </div>
+    
+</body>
+</html>
+<script>
+    const vm = new Vue({
+        el: "#app",
+        data:{
+            msg:'vue里面动画属性',
+            show: true
+
+        }
+       
+       
+    })
+</script>

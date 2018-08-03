@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/vue2.js"></script>
+    <script src="./js/axios.js"></script>
+    <style>
+        #app {
+          width: 600px;
+          margin: 10px auto;
+        }
+    
+        .tb {
+          border-collapse: collapse;
+          width: 100%;
+        }
+    
+        .tb th {
+          background-color: #0094ff;
+          color: white;
+        }
+    
+        .tb td,
+        .tb th {
+          padding: 5px;
+          border: 1px solid black;
+          text-align: center;
+        }
+    
+        .add {
+          padding: 5px;
+          border: 1px solid black;
+          margin-bottom: 10px;
+        }
+      </style>
+</head>
+<body>
+    <div id="app">
+        <div class="add">
+          编号:
+          <input type="text" v-model="newId" ref = "inputBrandId"> 品牌名称:
+          <input type="text" v-model="newName">
+          <input type="button" value="添加" @click="addData">
+        </div>
+    
+        <div class="add">
+          品牌名称:
+          <input type="text" placeholder="请输入搜索条件" v-myfocus v-model = "searchList">
+        </div>
+    
+        <div>
+          <table class="tb">
+            <tr >
+              <th>编号</th>
+              <th>品牌名称</th>
+              <th>创立时间</th>
+              <th>操作</th>
+            </tr>
+            <tr v-for="(value, index) in newList" :key="index">
+                <td>{{value.id}}</td>                
+                <td v-mycolor = "color">{{value.name}}</td>                
+                <td>{{value.ctime |formatTime('/')}}</td>                
+                <td><a href="#" @click="deleteData(value)">删除</a></td>                
+            </tr>
+            <tr>
+              <td colspan="4" v-if="list.length===0">没有品牌数据</td>
+            </tr>
+            <!-- 动态生成内容tr -->
+          </table>
+        </div>
+      </div>
+    
+</body>
+</html>
+<script>
+    const vm = new Vue({
+        el: "#app",
+        data:{
+            newId:'',
+            newName:'',
+            searchList:'',//定义一个空的搜索结果进行双向绑定
+            color: 'red',
+           list:[ ]
+
+        },
+        // mounted(){
+        //   //钩子函数,在页面dom元素挂载完毕后触发的事件,所以可以用来操作dom元素
+        //   //$refs是一个对象,上面可以挂载多个ref定义的dom对象
+        //   this.$refs.inputBrandId.focus();
+        // },
+        
+        methods:{
+            addData(){
+                this.list.push({brandId:this.newId,brandName:this.newName,ctime:new Date()});
+            },
+            deleteData(item){
+                //循判断根据brandId来找到那一项的数组索引,因为brandId不会改变
+                // this.list.forEach((item,index)=>{
+                //     //根据传入的brandId跟数据中的brandId找到对应的索引
+                //     if(item.brandId==idx){
+                //       this.list.splice(index,1);
+                //     }
+                // })
+                //函数传入item根据,item来找到索引
+                this.list.splice(this.list.indexOf(item),1)
+
+            }
+        },
+        //定义一个局部的自定义指令来实现文本字体的颜色
+        directives: {
+            mycolor:{
+                inserted(el,binding){
+                    el.style.color = binding.value;
+                }
+            },
+        //利用自定义指令也可以完成上述自动获取焦点功能
+         myfocus :{
+             inserted(el){
+                 //el此时就是我们需要操作的dom元素
+                 el.focus()
+             }
+         }
+
+        },
+        //通过生命周期created阶段来获取数据
+        created(){
+            axios.get('http://027xin.com:8899/api/getprodlist').then((res)=>{
+                this.list = res.data.message;
+            }).catch(error=>{
+                return error;
+            })
+        },
+
+        //通过局部自定义过滤器的方法来格式化时间
+        filters:{
+            formatTime(time,separate){
+                time = new Date(time);
+                var y = time.getFullYear();
+                 var m = time.getMonth() + 1;
+                 var d = time.getDate();
+                 return y + separate + m + separate + d ;
+            }
+        },
+        //通过computed计算属性来实现搜索功能
+        computed:{
+            newList(){
+                //通过判断搜索框里面的值和列表里面的值来返回过滤后的list,是newList的返回值
+             return this.list.filter(item=>item.name.indexOf(this.searchList)!==-1)
+            }
+        }
+    })
+</script>

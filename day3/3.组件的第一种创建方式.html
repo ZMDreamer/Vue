@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/vue2.js"></script>
+</head>
+<body>
+    <div id = "app">
+        <!-- //像使用html标签一样使用组件 -->
+        <index></index>
+    </div>
+    
+</body>
+</html>
+<script>
+    //利用Vue.extend()创建一个组件构造器
+    var index = Vue.extend({
+        template: "<div>首页组件</div>"
+    });
+    //利用Vue.component()函数创建组件实例, 两个参数,组件名,组件构造器
+    Vue.component('index',index);
+    const vm = new Vue({
+        el: "#app",
+        data:{
+
+        },
+        methods:{
+
+        }
+    })
+</script>
