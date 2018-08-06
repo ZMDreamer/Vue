@@ -1,10 +1,11 @@
 var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: './src/2.js',
   output: {
     path: path.join(__dirname, 'dist'),
-    publicPath: '/dist',
+    // publicPath: '/dist',
     filename: 'bundle.js'
   },
   module: {
@@ -44,7 +45,15 @@ module.exports = {
             limit: 50000
           }
         }]
-      }
+      },
+      
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: 'template.html',
+        title: 'webpack'
+    })
+]
 }
