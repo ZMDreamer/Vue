@@ -37,7 +37,7 @@ module.exports = {
         }]
       },
       {
-        test: /\.(png|jpg|gif)/,
+        test: /\.(png|jpg|gif|eot|svg|ttf|woff)/,
         use: [{
           loader: 'url-loader',
           options: {
@@ -46,6 +46,20 @@ module.exports = {
           }
         }]
       },
+      {
+        test: /\.js$/,
+        // Webpack2建议尽量避免exclude，更倾向于使用include
+        // exclude: /(node_modules)/, // node_modules下面的.js文件会被排除
+        include: [path.resolve(__dirname, 'src')],
+        use: {
+          loader: 'babel-loader',
+          // options里面的东西可以放到.babelrc文件中去
+          options: {
+            presets: ['env']
+          }
+        }
+      }
+      
       
     ]
   },

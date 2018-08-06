@@ -1,5 +1,6 @@
-const add = require('./1');
+import {add}  from './1';
 require('../css/index.css');
 require('../css/less.less');
 require('../css/scss.scss')
-document.write(add(1,2));
+require('../css/style.css')
+document.write(add(1,6));
